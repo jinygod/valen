@@ -2,7 +2,10 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <title>혜민이를 위한 선물 💝</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&display=swap"
@@ -16,105 +19,113 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: #ffe6eb; /* 더 따뜻한 핑크 */
+        background-color: #ffe6eb;
         font-family: "Gaegu", cursive;
         overflow: hidden;
         text-align: center;
+        touch-action: none; /* 도망가는 버튼 터치 최적화 */
+        -webkit-tap-highlight-color: transparent;
       }
 
       .container {
-        width: 85%;
-        max-width: 400px;
+        width: 90%; /* 모바일에서 사진 2장을 위해 폭을 살짝 넓힘 */
+        max-width: 380px;
         background: white;
-        padding: 2.5rem 2rem;
-        border-radius: 20px;
-        box-shadow: 0 10px 25px rgba(255, 100, 100, 0.15);
+        padding: 2.5rem 1.2rem;
+        border-radius: 25px;
+        box-shadow: 0 10px 30px rgba(255, 100, 100, 0.1);
         position: relative;
+        z-index: 10;
       }
 
       h1 {
         color: #ff6b81;
-        font-size: 2.2rem;
+        font-size: 1.8rem;
         margin: 0 0 15px 0;
-        word-break: keep-all;
       }
 
       p {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
         color: #444;
-        line-height: 1.6;
-        margin-bottom: 25px;
+        line-height: 1.5;
+        margin-bottom: 20px;
         word-break: keep-all;
       }
 
-      /* 메인 이미지 (귀여운 짤) */
       .main-img {
         width: 100%;
-        max-width: 220px;
+        max-width: 170px;
         border-radius: 15px;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
       }
 
-      /* 버튼 그룹 */
       .btn-group {
         display: flex;
         justify-content: center;
+        align-items: center;
         gap: 15px;
-        position: relative;
+        margin-top: 10px;
         min-height: 60px;
+        position: relative;
       }
 
       button {
-        padding: 12px 30px;
-        font-size: 1.3rem;
+        padding: 12px 25px;
+        font-size: 1.2rem;
         font-family: "Gaegu", cursive;
         border: none;
         border-radius: 50px;
         cursor: pointer;
-        white-space: nowrap;
+        transition: all 0.2s ease;
       }
 
-      /* YES 버튼 */
       .btn-yes {
         background-color: #ff6b81;
         color: white;
         font-weight: bold;
-        box-shadow: 0 4px 10px rgba(255, 107, 129, 0.3);
-        z-index: 10;
+        z-index: 100;
       }
 
-      /* NO 버튼 (도망갈 녀석) */
       .btn-no {
-        background-color: #f1f2f6;
-        color: #777;
-        position: absolute;
-        transition: all 0.2s ease;
+        background-color: #eee;
+        color: #888;
+        z-index: 50;
+        position: relative;
       }
 
-      /* 결과 화면 */
+      /* 결과 화면 스타일 */
       #result {
         display: none;
         flex-direction: column;
         align-items: center;
-        animation: fadeIn 0.5s;
+        animation: fadeIn 0.6s ease-out;
       }
 
-      /* 기프티콘 이미지 */
-      .gift-img {
+      /* 1행 2열 배치를 위한 이미지 컨테이너 */
+      .gift-container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 10px; /* 사진 사이 간격 */
         width: 100%;
+        margin-top: 10px;
+      }
+
+      .gift-img-half {
+        width: calc(50% - 5px); /* 화면의 절반씩 차지 */
         border-radius: 10px;
         border: 2px dashed #ff6b81;
-        margin-top: 15px;
+        object-fit: contain;
       }
 
       @keyframes fadeIn {
         from {
           opacity: 0;
-          transform: translateY(10px);
+          transform: scale(0.9);
         }
         to {
           opacity: 1;
-          transform: translateY(0);
+          transform: scale(1);
         }
       }
     </style>
@@ -124,8 +135,8 @@
       <h1>선물이 도착했습니다 💌</h1>
 
       <img
-        src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Q4bTJ4bDV4bmF5anh4c3l4a3l4bmF5anh4c3l4a3l4bmF5anh4cyZlcD12MV9zdGlja2VyX3Jlc3VsdCZjdD1z/K1tgb1IUeBORgP3nQA/giphy.gif"
-        alt="Cute Gift"
+        src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3d21pNTI4MzlhbDc5Mjl4emVqbmVyMW12ZTJmMTA5c2VsdmRsb2FlMiZlcD12MV9naWZzX3RyZW5kaW5nJmN0PWc/qKQQUKSSbWBkO2V3KX/giphy.gif"
+        alt="Cute Bear"
         class="main-img"
       />
 
@@ -151,70 +162,65 @@
 
     <div class="container" id="result">
       <h1>전달 완료! 🎉</h1>
+      <p style="margin-bottom: 5px">사실 이미 보냈지롱❤️</p>
       <p>맛있게 먹어요.<br />항상 고맙고 사랑해 ❤️</p>
 
-      <img src="./gifticon.jpg" alt="기프티콘" class="gift-img" />
-
-      <p style="margin-top: 20px; font-size: 1rem; color: #aaa">
-        (이미지를 저장해서 사용하세요)
-      </p>
+      <div class="gift-container">
+        <img src="./영수증1.png" alt="영수증1" class="gift-img-half" />
+        <img src="./영수증2.png" alt="영수증2" class="gift-img-half" />
+      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 
     <script>
-      // NO 버튼 도망가기 (한글 멘트로 수정)
-      function moveButton() {
-        const btn = document.getElementById("noBtn");
-        const x = Math.random() * 200 - 100;
-        const y = Math.random() * 200 - 100;
-        btn.style.transform = `translate(${x}px, ${y}px)`;
+      const noBtn = document.getElementById("noBtn");
 
-        // 장난스러운 멘트들
-        const texts = [
-          "어어?",
-          "못 누를걸?",
-          "안돼요~",
-          "받아줘잉",
-          "잡아봐라",
-        ];
-        btn.innerText = texts[Math.floor(Math.random() * texts.length)];
+      function moveButton() {
+        noBtn.style.position = "fixed";
+
+        // 화면 안쪽 여백을 고려한 랜덤 위치 계산
+        const padding = 50;
+        const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+        const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+
+        const randomX = Math.max(padding, Math.floor(Math.random() * maxX));
+        const randomY = Math.max(padding, Math.floor(Math.random() * maxY));
+
+        noBtn.style.left = randomX + "px";
+        noBtn.style.top = randomY + "px";
+
+        const messages = ["어딜!", "안돼", "아앙", "수락해!", "귀요미양?"];
+        noBtn.innerText = messages[Math.floor(Math.random() * messages.length)];
       }
 
-      // YES 버튼 클릭
       function acceptGift() {
-        const questionBox = document.getElementById("question-box");
-        const resultBox = document.getElementById("result");
+        document.getElementById("question-box").style.display = "none";
+        document.getElementById("result").style.display = "flex";
 
-        questionBox.style.display = "none";
-        resultBox.style.display = "flex";
+        const duration = 3000;
+        const end = Date.now() + duration;
 
-        // 폭죽 효과
-        var duration = 3 * 1000;
-        var animationEnd = Date.now() + duration;
-        var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+        (function frame() {
+          confetti({
+            particleCount: 3,
+            angle: 60,
+            spread: 55,
+            origin: { x: 0 },
+            colors: ["#ff6b81", "#ff4757"],
+          });
+          confetti({
+            particleCount: 3,
+            angle: 120,
+            spread: 55,
+            origin: { x: 1 },
+            colors: ["#ff6b81", "#ff4757"],
+          });
 
-        function randomInRange(min, max) {
-          return Math.random() * (max - min) + min;
-        }
-
-        var interval = setInterval(function () {
-          var timeLeft = animationEnd - Date.now();
-          if (timeLeft <= 0) return clearInterval(interval);
-          var particleCount = 50 * (timeLeft / duration);
-          confetti(
-            Object.assign({}, defaults, {
-              particleCount,
-              origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
-            }),
-          );
-          confetti(
-            Object.assign({}, defaults, {
-              particleCount,
-              origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
-            }),
-          );
-        }, 250);
+          if (Date.now() < end) {
+            requestAnimationFrame(frame);
+          }
+        })();
       }
     </script>
   </body>
