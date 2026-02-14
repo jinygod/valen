@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>혜민이를 위한 선물 💝</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #ffe6eb; /* 더 따뜻한 핑크 */
+        font-family: "Gaegu", cursive;
+        overflow: hidden;
+        text-align: center;
+      }
+
+      .container {
+        width: 85%;
+        max-width: 400px;
+        background: white;
+        padding: 2.5rem 2rem;
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(255, 100, 100, 0.15);
+        position: relative;
+      }
+
+      h1 {
+        color: #ff6b81;
+        font-size: 2.2rem;
+        margin: 0 0 15px 0;
+        word-break: keep-all;
+      }
+
+      p {
+        font-size: 1.3rem;
+        color: #444;
+        line-height: 1.6;
+        margin-bottom: 25px;
+        word-break: keep-all;
+      }
+
+      /* 메인 이미지 (귀여운 짤) */
+      .main-img {
+        width: 100%;
+        max-width: 220px;
+        border-radius: 15px;
+        margin-bottom: 20px;
+      }
+
+      /* 버튼 그룹 */
+      .btn-group {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        position: relative;
+        min-height: 60px;
+      }
+
+      button {
+        padding: 12px 30px;
+        font-size: 1.3rem;
+        font-family: "Gaegu", cursive;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        white-space: nowrap;
+      }
+
+      /* YES 버튼 */
+      .btn-yes {
+        background-color: #ff6b81;
+        color: white;
+        font-weight: bold;
+        box-shadow: 0 4px 10px rgba(255, 107, 129, 0.3);
+        z-index: 10;
+      }
+
+      /* NO 버튼 (도망갈 녀석) */
+      .btn-no {
+        background-color: #f1f2f6;
+        color: #777;
+        position: absolute;
+        transition: all 0.2s ease;
+      }
+
+      /* 결과 화면 */
+      #result {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        animation: fadeIn 0.5s;
+      }
+
+      /* 기프티콘 이미지 */
+      .gift-img {
+        width: 100%;
+        border-radius: 10px;
+        border: 2px dashed #ff6b81;
+        margin-top: 15px;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container" id="question-box">
+      <h1>선물이 도착했습니다 💌</h1>
+
+      <img
+        src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Q4bTJ4bDV4bmF5anh4c3l4a3l4bmF5anh4c3l4a3l4bmF5anh4cyZlcD12MV9zdGlja2VyX3Jlc3VsdCZjdD1z/K1tgb1IUeBORgP3nQA/giphy.gif"
+        alt="Cute Gift"
+        class="main-img"
+      />
+
+      <p>
+        <strong>혜민에게,</strong><br />
+        당신을 가장 사랑하는 사람이 보낸<br />
+        선물이 도착했습니다.<br /><br />
+        수락하시겠습니까?
+      </p>
+
+      <div class="btn-group">
+        <button class="btn-yes" onclick="acceptGift()">네, 좋아요! ❤️</button>
+        <button
+          class="btn-no"
+          id="noBtn"
+          onmouseover="moveButton()"
+          ontouchstart="moveButton()"
+        >
+          아니요
+        </button>
+      </div>
+    </div>
+
+    <div class="container" id="result">
+      <h1>전달 완료! 🎉</h1>
+      <p>맛있게 먹어요.<br />항상 고맙고 사랑해 ❤️</p>
+
+      <img src="./gifticon.jpg" alt="기프티콘" class="gift-img" />
+
+      <p style="margin-top: 20px; font-size: 1rem; color: #aaa">
+        (이미지를 저장해서 사용하세요)
+      </p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+    <script>
+      // NO 버튼 도망가기 (한글 멘트로 수정)
+      function moveButton() {
+        const btn = document.getElementById("noBtn");
+        const x = Math.random() * 200 - 100;
+        const y = Math.random() * 200 - 100;
+        btn.style.transform = `translate(${x}px, ${y}px)`;
+
+        // 장난스러운 멘트들
+        const texts = [
+          "어어?",
+          "못 누를걸?",
+          "안돼요~",
+          "받아줘잉",
+          "잡아봐라",
+        ];
+        btn.innerText = texts[Math.floor(Math.random() * texts.length)];
+      }
+
+      // YES 버튼 클릭
+      function acceptGift() {
+        const questionBox = document.getElementById("question-box");
+        const resultBox = document.getElementById("result");
+
+        questionBox.style.display = "none";
+        resultBox.style.display = "flex";
+
+        // 폭죽 효과
+        var duration = 3 * 1000;
+        var animationEnd = Date.now() + duration;
+        var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+        function randomInRange(min, max) {
+          return Math.random() * (max - min) + min;
+        }
+
+        var interval = setInterval(function () {
+          var timeLeft = animationEnd - Date.now();
+          if (timeLeft <= 0) return clearInterval(interval);
+          var particleCount = 50 * (timeLeft / duration);
+          confetti(
+            Object.assign({}, defaults, {
+              particleCount,
+              origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+            }),
+          );
+          confetti(
+            Object.assign({}, defaults, {
+              particleCount,
+              origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+            }),
+          );
+        }, 250);
+      }
+    </script>
+  </body>
+</html>
